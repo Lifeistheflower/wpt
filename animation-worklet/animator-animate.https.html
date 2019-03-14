@@ -14,6 +14,7 @@
     await registerConstantLocalTimeAnimator(500);
     const effect = new KeyframeEffect(target, [{ opacity: 0 }], { duration: 1000 });
     const animation = new WorkletAnimation('constant_time', effect);
+assert_equals(getComputedStyle(target).opacity, 1);
     animation.play();
 
     // wait until local times are synced back to the main thread.
