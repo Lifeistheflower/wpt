@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class="reftest-wait">
+<meta charset="utf-8">
+<title>position:sticky should operate correctly</title>
+<link rel="author" title="Mason Freed" href="mailto:masonfreed@chromium.org">
+<link rel="help" href="https://www.w3.org/TR/css-position-3/#sticky-pos" />
+<meta name="assert" content="This test checks that position:sticky elements are properly displayed when scrolled" />
+<link rel="match"  href="position-sticky-scroll-bug-ref.html">
+
+<div style="position: fixed;">There should be text visible below.</div>
+<div id="A" style="height: 200px;width:600px;position: sticky;top: 0px;">
+  <div id="B" style="position: relative;top: 100px;">
+    <div id="C" style="height: 150px;width: 500px;position: absolute;backface-visibility: hidden;background: white;">
+    </div>
+    <div id="D" style="overflow: hidden;">
+       <a id="E" style="position: relative;">THIS SHOULD STAY VISIBLE<BR>IF YOU SCROLL DOWN</a>
+    </div>
+  </div>
+</div>
+<div id="F" style="height: 2000px;">
+</div>
+<script>
+  window.onload = function() {
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          window.scrollTo(0,300);
+          document.documentElement.classList.remove("reftest-wait");
+        });
+      });
+  };
+</script>
+</html>
+
